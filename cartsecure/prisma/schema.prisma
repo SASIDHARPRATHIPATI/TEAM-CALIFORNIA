@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -11,4 +5,205 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+// ─────────────────────────────────────────────
+// USERS & ROLES
+// ─────────────────────────────────────────────
+model User {
+  id            String   @id @default(cuid())
+  email         String   @unique
+  passwordHash  String
+  name          String
+  role          Role     @default(CUSTOMER)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  wallet        Wallet?
+  orders        Order[]
+  refreshTokens RefreshToken[]
+  auditEvents   AuditEvent[]
+  aiLogs        AiLog[]
+
+  @@index([email])
+}
+
+enum Role {
+  CUSTOMER
+  SELLER
+  ADMIN
+}
+
+// ─────────────────────────────────────────────
+// WALLET (demo balance for escrow)
+// ─────────────────────────────────────────────
+model Wallet {
+  id      String  @id @default(cuid())
+  userId  String  @unique
+  balance Decimal @db.Decimal(14, 2) @default(0)
+  escrow  Decimal @db.Decimal(14, 2) @default(0)
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+// ─────────────────────────────────────────────
+// SELLER (Trust Score entity)
+// ─────────────────────────────────────────────
+model Seller {
+  id              String   @id @default(cuid())
+  domain          String   @unique
+  name            String
+  trustScore      Int      @default(0)
+  riskLevel       String   @default("UNKNOWN")
+  domainAgeDays   Int?
+  hasSSL          Boolean  @default(false)
+  hasAddress      Boolean  @default(false)
+  hasReturnPolicy Boolean  @default(false)
+  complaints      Int      @default(0)
+  lastCheckedAt   DateTime @default(now())
+  createdAt       DateTime @default(now())
+
+  products Product[]
+  orders   Order[]
+  signals  SellerSignal[]
+
+  @@index([trustScore])
+}
+
+model SellerSignal {
+  id        String   @id @default(cuid())
+  sellerId  String
+  kind      String
+  severity  String
+  detail    String
+  createdAt DateTime @default(now())
+  seller    Seller   @relation(fields: [sellerId], references: [id], onDelete: Cascade)
+
+  @@index([sellerId, createdAt])
+}
+
+// ─────────────────────────────────────────────
+// PRODUCTS (marketplace)
+// ─────────────────────────────────────────────
+model Product {
+  id          String   @id @default(cuid())
+  sellerId    String
+  seller      Seller   @relation(fields: [sellerId], references: [id])
+  name        String
+  description String?
+  price       Decimal  @db.Decimal(14, 2)
+  marketPrice Decimal  @db.Decimal(14, 2)
+  imageUrl    String?
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+
+  @@index([sellerId])
+}
+
+// ─────────────────────────────────────────────
+// ORDERS + ESCROW STATE MACHINE
+// ─────────────────────────────────────────────
+model Order {
+  id                String      @id @default(cuid())
+  buyerId           String
+  buyer             User        @relation(fields: [buyerId], references: [id])
+  sellerId          String
+  seller            Seller      @relation(fields: [sellerId], references: [id])
+  productName       String
+  amount            Decimal     @db.Decimal(14, 2)
+  marketPriceAtTime Decimal?    @db.Decimal(14, 2)
+  priceDeltaPct     Float?
+  escrowState       EscrowState @default(PENDING)
+
+  trackingId        String?
+  courierName       String?
+  courierVerified   Boolean     @default(false)
+
+  otpCode           String?
+  otpVerified       Boolean     @default(false)
+  customerConfirmed Boolean     @default(false)
+
+  dispatchBy        DateTime
+  shippedAt         DateTime?
+  deliveredAt       DateTime?
+  releasedAt        DateTime?
+  refundedAt        DateTime?
+  disputeReason     String?
+
+  createdAt         DateTime    @default(now())
+  updatedAt         DateTime    @updatedAt
+
+  events OrderEvent[]
+
+  @@index([buyerId])
+  @@index([escrowState])
+}
+
+enum EscrowState {
+  PENDING
+  HELD
+  SHIPPED
+  DELIVERED
+  RELEASED
+  REFUNDED
+  DISPUTED
+}
+
+model OrderEvent {
+  id        String       @id @default(cuid())
+  orderId   String
+  order     Order        @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  fromState EscrowState?
+  toState   EscrowState
+  actor     String
+  note      String?
+  createdAt DateTime     @default(now())
+
+  @@index([orderId, createdAt])
+}
+
+// ─────────────────────────────────────────────
+// SESSIONS
+// ─────────────────────────────────────────────
+model RefreshToken {
+  id        String    @id @default(cuid())
+  userId    String
+  tokenHash String    @unique
+  expiresAt DateTime
+  revokedAt DateTime?
+  createdAt DateTime  @default(now())
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+// ─────────────────────────────────────────────
+// AUDIT & AI LOGS
+// ─────────────────────────────────────────────
+model AuditEvent {
+  id        String   @id @default(cuid())
+  userId    String?
+  action    String
+  severity  String   @default("LOW")
+  ip        String?
+  userAgent String?
+  metadata  Json?
+  createdAt DateTime @default(now())
+  user      User?    @relation(fields: [userId], references: [id])
+
+  @@index([createdAt])
+  @@index([userId, action])
+}
+
+model AiLog {
+  id           String   @id @default(cuid())
+  userId       String
+  promptHash   String
+  promptSafe   String
+  responseSafe String
+  blocked      Boolean  @default(false)
+  reason       String?
+  createdAt    DateTime @default(now())
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, createdAt])
 }
