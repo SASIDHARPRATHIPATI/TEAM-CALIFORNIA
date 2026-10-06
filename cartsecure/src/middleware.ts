@@ -3,8 +3,7 @@ import { jwtVerify } from "jose";
 
 const ACCESS_COOKIE = "cs_at";
 
-const PROTECTED = ["/dashboard", "/orders", "/security", "/seller", "/admin", "/check", "/wallet"];
-const PUBLIC_API = [
+const PROTECTED = ["/dashboard", "/orders", "/seller", "/admin", "/wallet"];const PUBLIC_API = [
   "/api/auth/login",
   "/api/auth/register",
   "/api/auth/refresh",
