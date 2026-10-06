@@ -1,69 +1,118 @@
-import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <div className="min-h-screen bg-slate-950 text-white p-8">
+      <div className="max-w-5xl mx-auto">
+        <div className="text-center mb-12">
+          <h1 className="text-5xl font-bold mb-3">🛡️ CartSecure</h1>
+          <p className="text-slate-400 text-lg">
+            A trust-verified marketplace that protects buyers from online fraud.
+          </p>
+          <p className="text-sm text-emerald-400 mt-2">
+            ● Live Demo · Built for BuildSecure 2026
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+
+        <h2 className="text-2xl font-bold mb-4">Four Defense Layers</h2>
+        <div className="grid grid-cols-2 gap-4 mb-8">
+          <Link
+            href="/check"
+            className="p-6 bg-slate-900 border border-emerald-800 rounded-xl hover:border-emerald-500 transition"
           >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            <div className="text-3xl mb-2">🛡️</div>
+            <div className="font-bold text-lg mb-1">SellerShield</div>
+            <div className="text-sm text-slate-400 mb-3">
+              Paste any seller URL → get a Trust Score before paying.
+            </div>
+            <div className="inline-block px-2 py-1 rounded text-xs bg-emerald-900 text-emerald-300">
+              ● LIVE
+            </div>
+          </Link>
+
+          <Link
+            href="/security"
+            className="p-6 bg-slate-900 border border-emerald-800 rounded-xl hover:border-emerald-500 transition"
           >
-            Documentation
-          </a>
+            <div className="text-3xl mb-2">🔐</div>
+            <div className="font-bold text-lg mb-1">Security Center</div>
+            <div className="text-sm text-slate-400 mb-3">
+              Live attack detection with incident IDs and audit trail.
+            </div>
+            <div className="inline-block px-2 py-1 rounded text-xs bg-emerald-900 text-emerald-300">
+              ● LIVE
+            </div>
+          </Link>
+
+          <div className="p-6 bg-slate-900 border border-slate-800 rounded-xl opacity-60">
+            <div className="text-3xl mb-2">💰</div>
+            <div className="font-bold text-lg mb-1">PriceGuard</div>
+            <div className="text-sm text-slate-400 mb-3">
+              Detects suspicious price anomalies (57% below market).
+            </div>
+            <div className="inline-block px-2 py-1 rounded text-xs bg-amber-900 text-amber-300">
+              ● IN DEV
+            </div>
+          </div>
+
+          <div className="p-6 bg-slate-900 border border-slate-800 rounded-xl opacity-60">
+            <div className="text-3xl mb-2">💳</div>
+            <div className="font-bold text-lg mb-1">PaymentShield</div>
+            <div className="text-sm text-slate-400 mb-3">
+              Escrow — money held until delivery is verified.
+            </div>
+            <div className="inline-block px-2 py-1 rounded text-xs bg-amber-900 text-amber-300">
+              ● IN DEV
+            </div>
+          </div>
+
+          <div className="p-6 bg-slate-900 border border-slate-800 rounded-xl opacity-60">
+            <div className="text-3xl mb-2">📦</div>
+            <div className="font-bold text-lg mb-1">ShipTrack</div>
+            <div className="text-sm text-slate-400 mb-3">
+              Verifies tracking IDs against courier APIs. Detects fakes.
+            </div>
+            <div className="inline-block px-2 py-1 rounded text-xs bg-amber-900 text-amber-300">
+              ● IN DEV
+            </div>
+          </div>
+
+          <Link
+            href="/login"
+            className="p-6 bg-slate-900 border border-slate-800 rounded-xl hover:border-slate-500 transition"
+          >
+            <div className="text-3xl mb-2">🔑</div>
+            <div className="font-bold text-lg mb-1">Auth System</div>
+            <div className="text-sm text-slate-400 mb-3">
+              argon2id · JWT rotation · RBAC
+            </div>
+            <div className="inline-block px-2 py-1 rounded text-xs bg-emerald-900 text-emerald-300">
+              ● LIVE
+            </div>
+          </Link>
         </div>
-      </main>
+
+        <div className="bg-slate-900 border border-slate-800 rounded-xl p-6">
+          <h3 className="font-bold mb-2">Roadmap</h3>
+          <ul className="text-sm text-slate-400 space-y-1">
+            <li>📅 Phase 1 (Shipped): SellerShield, Security Center, Auth</li>
+            <li>📅 Phase 2: PriceGuard + PaymentShield escrow flow</li>
+            <li>📅 Phase 3: ShipTrack courier API integration</li>
+            <li>📅 Phase 4: Razorpay/Cashfree for regulated escrow</li>
+          </ul>
+        </div>
+
+        <div className="mt-8 text-center text-sm text-slate-500">
+          <a
+            href="https://github.com/SASIDHARPRATHIPATI/TEAM-CALIFORNIA"
+            className="hover:text-white"
+          >
+            GitHub Repo
+          </a>
+          {" · "}
+          <span>Live: team-california-nine.vercel.app</span>
+        </div>
+      </div>
     </div>
   );
 }
