@@ -12,8 +12,11 @@ const baseCookieOptions = {
   path: "/",
 };
 
-export function setAuthCookies(access: string, refresh: string): void {
-  const c = cookies();
+export async function setAuthCookies(
+  access: string,
+  refresh: string
+): Promise<void> {
+  const c = await cookies();
   c.set(ACCESS_COOKIE, access, { ...baseCookieOptions, maxAge: 60 * 15 });
   c.set(REFRESH_COOKIE, refresh, {
     ...baseCookieOptions,
@@ -21,16 +24,18 @@ export function setAuthCookies(access: string, refresh: string): void {
   });
 }
 
-export function clearAuthCookies(): void {
-  const c = cookies();
+export async function clearAuthCookies(): Promise<void> {
+  const c = await cookies();
   c.set(ACCESS_COOKIE, "", { ...baseCookieOptions, maxAge: 0 });
   c.set(REFRESH_COOKIE, "", { ...baseCookieOptions, maxAge: 0 });
 }
 
-export function readAccessCookie(): string | undefined {
-  return cookies().get(ACCESS_COOKIE)?.value;
+export async function readAccessCookie(): Promise<string | undefined> {
+  const c = await cookies();
+  return c.get(ACCESS_COOKIE)?.value;
 }
 
-export function readRefreshCookie(): string | undefined {
-  return cookies().get(REFRESH_COOKIE)?.value;
+export async function readRefreshCookie(): Promise<string | undefined> {
+  const c = await cookies();
+  return c.get(REFRESH_COOKIE)?.value;
 }

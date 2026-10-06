@@ -1,11 +1,11 @@
 import { NextResponse } from "next/server";
 import { headers } from "next/headers";
-import { clearAuthCookies, readRefreshCookie } from "@/lib/session";
+import { clearAuthCookies } from "@/lib/session";
 import { revokeAllUserTokens } from "@/lib/auth";
 import { writeAudit } from "@/lib/audit";
 
 export async function POST() {
-  const h = headers();
+  const h = await headers();
   const userId = h.get("x-user-id");
 
   if (userId) {
@@ -13,6 +13,6 @@ export async function POST() {
     await writeAudit({ userId, action: "auth.logout", severity: "LOW" });
   }
 
-  clearAuthCookies();
+  await clearAuthCookies();
   return NextResponse.json({ ok: true });
 }

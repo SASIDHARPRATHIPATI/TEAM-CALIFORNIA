@@ -43,7 +43,7 @@ export async function POST(req: NextRequest) {
 
     const access = await signAccessToken({ sub: user.id, role: user.role });
     const refresh = await issueRefreshToken(user.id);
-    setAuthCookies(access, refresh);
+    await setAuthCookies(access, refresh);
 
     await writeAudit({
       userId: user.id,

@@ -10,7 +10,7 @@ export async function writeAudit(opts: {
   metadata?: Record<string, unknown>;
 }): Promise<void> {
   try {
-    const h = headers();
+    const h = await headers();
     const ip =
       h.get("x-forwarded-for")?.split(",")[0]?.trim() ??
       h.get("x-real-ip") ??
@@ -28,7 +28,6 @@ export async function writeAudit(opts: {
       },
     });
   } catch (e) {
-    // Never let audit failures break the request
     console.error("[audit] failed to write:", e);
   }
 }
