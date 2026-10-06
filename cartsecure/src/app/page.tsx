@@ -14,7 +14,7 @@ export default function Home() {
           </p>
         </div>
 
-        <h2 className="text-2xl font-bold mb-4">Four Defense Layers</h2>
+        <h2 className="text-2xl font-bold mb-4">Six Defense Layers</h2>
         <div className="grid grid-cols-2 gap-4 mb-8">
           <Link
             href="/check"
@@ -24,6 +24,48 @@ export default function Home() {
             <div className="font-bold text-lg mb-1">SellerShield</div>
             <div className="text-sm text-slate-400 mb-3">
               Paste any seller URL → get a Trust Score before paying.
+            </div>
+            <div className="inline-block px-2 py-1 rounded text-xs bg-emerald-900 text-emerald-300">
+              ● LIVE
+            </div>
+          </Link>
+
+          <Link
+            href="/priceguard"
+            className="p-6 bg-slate-900 border border-emerald-800 rounded-xl hover:border-emerald-500 transition"
+          >
+            <div className="text-3xl mb-2">💰</div>
+            <div className="font-bold text-lg mb-1">PriceGuard</div>
+            <div className="text-sm text-slate-400 mb-3">
+              Detects suspicious price anomalies (57% below market).
+            </div>
+            <div className="inline-block px-2 py-1 rounded text-xs bg-emerald-900 text-emerald-300">
+              ● LIVE
+            </div>
+          </Link>
+
+          <Link
+            href="/escrow"
+            className="p-6 bg-slate-900 border border-emerald-800 rounded-xl hover:border-emerald-500 transition"
+          >
+            <div className="text-3xl mb-2">💳</div>
+            <div className="font-bold text-lg mb-1">PaymentShield</div>
+            <div className="text-sm text-slate-400 mb-3">
+              Escrow — money held until delivery is verified. Auto-refund on failure.
+            </div>
+            <div className="inline-block px-2 py-1 rounded text-xs bg-emerald-900 text-emerald-300">
+              ● LIVE
+            </div>
+          </Link>
+
+          <Link
+            href="/shiptrack"
+            className="p-6 bg-slate-900 border border-emerald-800 rounded-xl hover:border-emerald-500 transition"
+          >
+            <div className="text-3xl mb-2">📦</div>
+            <div className="font-bold text-lg mb-1">ShipTrack</div>
+            <div className="text-sm text-slate-400 mb-3">
+              Verifies tracking IDs against courier APIs. Detects fakes.
             </div>
             <div className="inline-block px-2 py-1 rounded text-xs bg-emerald-900 text-emerald-300">
               ● LIVE
@@ -45,31 +87,6 @@ export default function Home() {
           </Link>
 
           <Link
-            href="/escrow"
-            className="p-6 bg-slate-900 border border-emerald-800 rounded-xl hover:border-emerald-500 transition"
-          >
-            <div className="text-3xl mb-2">💳</div>
-            <div className="font-bold text-lg mb-1">PaymentShield</div>
-            <div className="text-sm text-slate-400 mb-3">
-              Escrow — money held until delivery is verified. Auto-refund on failure.
-            </div>
-            <div className="inline-block px-2 py-1 rounded text-xs bg-emerald-900 text-emerald-300">
-              ● LIVE
-            </div>
-          </Link>
-
-          <div className="p-6 bg-slate-900 border border-slate-800 rounded-xl opacity-60">
-            <div className="text-3xl mb-2">📦</div>
-            <div className="font-bold text-lg mb-1">ShipTrack</div>
-            <div className="text-sm text-slate-400 mb-3">
-              Verifies tracking IDs against courier APIs. Detects fakes.
-            </div>
-            <div className="inline-block px-2 py-1 rounded text-xs bg-amber-900 text-amber-300">
-              ● IN DEV
-            </div>
-          </div>
-
-          <Link
             href="/login"
             className="p-6 bg-slate-900 border border-emerald-800 rounded-xl hover:border-emerald-500 transition"
           >
@@ -82,17 +99,6 @@ export default function Home() {
               ● LIVE
             </div>
           </Link>
-
-          <div className="p-6 bg-slate-900 border border-slate-800 rounded-xl opacity-60">
-            <div className="text-3xl mb-2">💰</div>
-            <div className="font-bold text-lg mb-1">PriceGuard</div>
-            <div className="text-sm text-slate-400 mb-3">
-              Detects suspicious price anomalies (57% below market).
-            </div>
-            <div className="inline-block px-2 py-1 rounded text-xs bg-amber-900 text-amber-300">
-              ● IN DEV
-            </div>
-          </div>
         </div>
 
         <div className="bg-slate-900 border border-slate-800 rounded-xl p-6 mb-6">
@@ -116,9 +122,9 @@ export default function Home() {
         <div className="bg-slate-900 border border-slate-800 rounded-xl p-6">
           <h3 className="font-bold mb-2">Roadmap</h3>
           <ul className="text-sm text-slate-400 space-y-1">
-            <li>📅 Phase 1 (Shipped): SellerShield · Security Center · Escrow · Auth</li>
-            <li>📅 Phase 2: PriceGuard price anomaly detection</li>
-            <li>📅 Phase 3: ShipTrack courier API integration</li>
+            <li>📅 Phase 1 (Shipped): SellerShield · PriceGuard · PaymentShield Escrow · ShipTrack · Security Center · Auth</li>
+            <li>📅 Phase 2: Live courier API integration (Delhivery, BlueDart)</li>
+            <li>📅 Phase 3: ML-based trust scoring with historical fraud data</li>
             <li>📅 Phase 4: Razorpay/Cashfree for regulated live escrow</li>
           </ul>
         </div>
