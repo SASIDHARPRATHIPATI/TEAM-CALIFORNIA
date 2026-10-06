@@ -4,6 +4,23 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-slate-950 text-white p-8">
       <div className="max-w-5xl mx-auto">
+        {/* Top Nav */}
+        <div className="flex justify-end gap-3 mb-6">
+          <Link
+            href="/login"
+            className="px-4 py-2 bg-slate-900 border border-slate-700 rounded-lg text-sm hover:border-slate-500 transition"
+          >
+            Login
+          </Link>
+          <Link
+            href="/register"
+            className="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 rounded-lg text-sm font-semibold transition"
+          >
+            Sign Up
+          </Link>
+        </div>
+
+        {/* Hero */}
         <div className="text-center mb-12">
           <h1 className="text-5xl font-bold mb-3">🛡️ CartSecure</h1>
           <p className="text-slate-400 text-lg">
@@ -14,6 +31,7 @@ export default function Home() {
           </p>
         </div>
 
+        {/* Feature Grid */}
         <h2 className="text-2xl font-bold mb-4">Six Defense Layers</h2>
         <div className="grid grid-cols-2 gap-4 mb-8">
           <Link
@@ -101,6 +119,7 @@ export default function Home() {
           </Link>
         </div>
 
+        {/* How it protects */}
         <div className="bg-slate-900 border border-slate-800 rounded-xl p-6 mb-6">
           <h3 className="font-bold mb-3">How CartSecure Protects You</h3>
           <div className="grid grid-cols-3 gap-4 text-sm">
@@ -119,6 +138,7 @@ export default function Home() {
           </div>
         </div>
 
+        {/* Roadmap */}
         <div className="bg-slate-900 border border-slate-800 rounded-xl p-6">
           <h3 className="font-bold mb-2">Roadmap</h3>
           <ul className="text-sm text-slate-400 space-y-1">
@@ -129,6 +149,7 @@ export default function Home() {
           </ul>
         </div>
 
+        {/* Footer */}
         <div className="mt-8 text-center text-sm text-slate-500">
           <a
             href="https://github.com/SASIDHARPRATHIPATI/TEAM-CALIFORNIA"
