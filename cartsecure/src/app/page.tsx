@@ -10,7 +10,7 @@ export default function Home() {
             A trust-verified marketplace that protects buyers from online fraud.
           </p>
           <p className="text-sm text-emerald-400 mt-2">
-            ● Live Demo · Built for BuildSecure 2026
+            ● Live Demo · Built for BuildSecure 2026 · PS-02 E-Commerce
           </p>
         </div>
 
@@ -44,27 +44,19 @@ export default function Home() {
             </div>
           </Link>
 
-          <div className="p-6 bg-slate-900 border border-slate-800 rounded-xl opacity-60">
-            <div className="text-3xl mb-2">💰</div>
-            <div className="font-bold text-lg mb-1">PriceGuard</div>
-            <div className="text-sm text-slate-400 mb-3">
-              Detects suspicious price anomalies (57% below market).
-            </div>
-            <div className="inline-block px-2 py-1 rounded text-xs bg-amber-900 text-amber-300">
-              ● IN DEV
-            </div>
-          </div>
-
-          <div className="p-6 bg-slate-900 border border-slate-800 rounded-xl opacity-60">
+          <Link
+            href="/escrow"
+            className="p-6 bg-slate-900 border border-emerald-800 rounded-xl hover:border-emerald-500 transition"
+          >
             <div className="text-3xl mb-2">💳</div>
             <div className="font-bold text-lg mb-1">PaymentShield</div>
             <div className="text-sm text-slate-400 mb-3">
-              Escrow — money held until delivery is verified.
+              Escrow — money held until delivery is verified. Auto-refund on failure.
             </div>
-            <div className="inline-block px-2 py-1 rounded text-xs bg-amber-900 text-amber-300">
-              ● IN DEV
+            <div className="inline-block px-2 py-1 rounded text-xs bg-emerald-900 text-emerald-300">
+              ● LIVE
             </div>
-          </div>
+          </Link>
 
           <div className="p-6 bg-slate-900 border border-slate-800 rounded-xl opacity-60">
             <div className="text-3xl mb-2">📦</div>
@@ -79,26 +71,55 @@ export default function Home() {
 
           <Link
             href="/login"
-            className="p-6 bg-slate-900 border border-slate-800 rounded-xl hover:border-slate-500 transition"
+            className="p-6 bg-slate-900 border border-emerald-800 rounded-xl hover:border-emerald-500 transition"
           >
             <div className="text-3xl mb-2">🔑</div>
             <div className="font-bold text-lg mb-1">Auth System</div>
             <div className="text-sm text-slate-400 mb-3">
-              argon2id · JWT rotation · RBAC
+              argon2id · JWT rotation · RBAC middleware
             </div>
             <div className="inline-block px-2 py-1 rounded text-xs bg-emerald-900 text-emerald-300">
               ● LIVE
             </div>
           </Link>
+
+          <div className="p-6 bg-slate-900 border border-slate-800 rounded-xl opacity-60">
+            <div className="text-3xl mb-2">💰</div>
+            <div className="font-bold text-lg mb-1">PriceGuard</div>
+            <div className="text-sm text-slate-400 mb-3">
+              Detects suspicious price anomalies (57% below market).
+            </div>
+            <div className="inline-block px-2 py-1 rounded text-xs bg-amber-900 text-amber-300">
+              ● IN DEV
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-slate-900 border border-slate-800 rounded-xl p-6 mb-6">
+          <h3 className="font-bold mb-3">How CartSecure Protects You</h3>
+          <div className="grid grid-cols-3 gap-4 text-sm">
+            <div>
+              <div className="text-slate-300 font-semibold mb-1">1. Verify</div>
+              <div className="text-slate-500">SellerShield scores the seller before payment</div>
+            </div>
+            <div>
+              <div className="text-slate-300 font-semibold mb-1">2. Protect</div>
+              <div className="text-slate-500">PaymentShield holds money in escrow</div>
+            </div>
+            <div>
+              <div className="text-slate-300 font-semibold mb-1">3. Defend</div>
+              <div className="text-slate-500">Every attack logged, every action audited</div>
+            </div>
+          </div>
         </div>
 
         <div className="bg-slate-900 border border-slate-800 rounded-xl p-6">
           <h3 className="font-bold mb-2">Roadmap</h3>
           <ul className="text-sm text-slate-400 space-y-1">
-            <li>📅 Phase 1 (Shipped): SellerShield, Security Center, Auth</li>
-            <li>📅 Phase 2: PriceGuard + PaymentShield escrow flow</li>
+            <li>📅 Phase 1 (Shipped): SellerShield · Security Center · Escrow · Auth</li>
+            <li>📅 Phase 2: PriceGuard price anomaly detection</li>
             <li>📅 Phase 3: ShipTrack courier API integration</li>
-            <li>📅 Phase 4: Razorpay/Cashfree for regulated escrow</li>
+            <li>📅 Phase 4: Razorpay/Cashfree for regulated live escrow</li>
           </ul>
         </div>
 
